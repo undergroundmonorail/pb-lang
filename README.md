@@ -17,12 +17,10 @@ A painter, even with a brush, is nothing without their palette. pb provides a pa
 
 * `X` - The brush's X position on the canvas (starts at 0)
 * `Y` - The brush's Y position on the canvas (starts at 0)
-* `W` - The width of the canvas
-* `H` - The height of the canvas
 * `P` - The current output colour (Initialized to `0`)
 * `B` - The character on the canvas at the brush's current location as an ASCII value (Initialized to `0` at every point on the canvas.)
 * `C` - The colour of the character at the brush's current location (as a number, all possible values defined later in this document. Initialized to `0` everywhere.)
-* `T` - Initialized to `-1`, more on this later.
+* `T` - Initialized to `0`, more on this later.
 
 Unfortunately, your palette has limited space. No variables can be defined in a pb program (though this can be worked around).
 
