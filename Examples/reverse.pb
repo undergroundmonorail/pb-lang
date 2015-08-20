@@ -1,1 +1,7 @@
 ^w[B!0]{w[B!0]{>}<t[B]b[0]<[X]vw[B!0]{>}b[T]<[X]^}
+
+# Input:
+# aeiou. aeiou. holla holla get $
+
+# Output:
+# $ teg alloh alloh .uoiea .uoiea
