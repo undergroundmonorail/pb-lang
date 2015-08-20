@@ -11,6 +11,9 @@ newlines. Simply go to where you'd like the character you'd be, and print it the
 When using pb, forget the outdated concepts of a "cursor" or "terminal". There is only a brush, a canvas, and your art. The brush begins in the upper left corner of the canvas and is manipulated from there to create 
 the output.
 
+Note that the pb interpreter included in this repo requires [colorama](https://pypi.python.org/pypi/colorama) on Windows in order to see the proper colours. There's also an annoying message that you have to dismiss
+every time if you aren't on Windows unless you install the module. Sorry.
+
 # Spec
 
 A painter, even with a brush, is nothing without their palette. pb provides a palette of variables, available for all pb programs to use.

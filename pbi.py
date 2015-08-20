@@ -2,6 +2,20 @@
 
 import sys
 
+RAW = False
+
+try:
+	import colorama
+except:
+	answer = ''
+	while answer not in list('ynYN'):
+		answer = raw_input('Are you on Windows? (y/n)')
+	if answer in 'yY':
+		print 'You must install the colorama module before running this program if you wish to see the proper output.'
+		RAW = True
+	else:
+		print "To stop seeing this message, install the colorama module."
+
 # Some might say using global variables for this purpose is bad practice.
 # I think those people could stand to be a little bit more adventurous.
 
@@ -117,11 +131,31 @@ def get_input():
 	for x, c in enumerate(raw_input('Enter input: ')):
 		canvas[(x, -1)] = (ord(c), 0)
 
+def output():
+	if not RAW: colorama.init()
+	max_x = max(map(lambda t:t[0], canvas.keys()))
+	max_y = max(map(lambda t:t[1], canvas.keys()))
+	for row in xrange(max_y + 1):
+		o = []
+		for column in xrange(max_x + 1):
+			char, colour = canvas_read(column, row)
+			char = char or 32
+			o.append((char, colour))
+		if RAW:
+			print o
+		else:
+			for i, c in enumerate(o):
+				if c[1] == 0: o[i] = (c[0], 7)
+				elif c[1] == 7: o[i] = (c[0], 0)
+			print ''.join('\033[' + str(c[1]+30) + 'm' + chr(c[0]) for c in o)
+				
+
 def main(file):
 	get_input()
 	code = read_code(file)
 	tokens = tokenize(code)
 	execute(tokens)
+	output()
 
 if __name__ == '__main__':
 	if len(sys.argv) == 2:
