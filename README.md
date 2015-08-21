@@ -14,6 +14,10 @@ the output.
 Note that the pb interpreter included in this repo requires [colorama](https://pypi.python.org/pypi/colorama) on Windows in order to see the proper colours. There's also an annoying message that you have to dismiss
 every time if you aren't on Windows unless you install the module. Sorry.
 
+# pbi
+
+pbi is the pb interpreter. Run it as `pbi.py program.pb`. You may optionally include a flag such as `-d=1000`, which will print the canvas at each tick. The included number sets the delay between ticks in milliseconds.
+
 # Spec
 
 A painter, even with a brush, is nothing without their palette. pb provides a palette of variables, available for all pb programs to use.
