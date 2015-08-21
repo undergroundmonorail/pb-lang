@@ -166,7 +166,7 @@ def main(args):
 	file = args[0]
 	delay = 0
 	if len(args) == 2:
-		if file.startswith("-r="):
+		if file.startswith("-d="):
 			delay = int(file[3:])
 			file = args[1]
 		else:
