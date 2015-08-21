@@ -1,6 +1,7 @@
 #!/bin/python2
 
 import sys
+import time
 
 RAW = False
 
@@ -87,7 +88,10 @@ def expression(e):
 	# TODO: make this not a piece of shit
 	return eval(e, globals())
 	
-def execute(tokens):
+def execute(tokens, delay):
+	if delay != 0:
+		output(delay)
+	
 	global X # l
 	global Y # m
 	global P # a
@@ -124,15 +128,19 @@ def execute(tokens):
 			condition_1, condition_2 = condition.split('!='[break_on_not])
 			code = tokenize(token[4+len(condition):-1])
 			while (expression(condition_1) == expression(condition_2) and break_on_not) or (expression(condition_1) != expression(condition_2) and not break_on_not):
-				execute(code)
+				execute(code, delay)
 
 def get_input():
 	global canvas
 	for x, c in enumerate(raw_input('Enter input: ')):
 		canvas[(x, -1)] = (ord(c), 0)
 
-def output():
-	if not RAW: colorama.init()
+def output(delay):
+	if delay != 0:
+		print '\033[2J\033[1;1f'
+	for key in canvas.keys():
+		if canvas[key] == (0, 0):
+			del canvas[key]
 	max_x = max(map(lambda t:t[0], canvas.keys()))
 	max_y = max(map(lambda t:t[1], canvas.keys()))
 	for row in xrange(max_y + 1):
@@ -148,17 +156,31 @@ def output():
 				if c[1] == 0: o[i] = (c[0], 7)
 				elif c[1] == 7: o[i] = (c[0], 0)
 			print ''.join('\033[' + str(c[1]+30) + 'm' + chr(c[0]) for c in o)
+	
+	if delay != 0:
+		time.sleep(delay / 1000.0)
+		
 				
 
-def main(file):
+def main(args):
+	file = args[0]
+	delay = 0
+	if len(args) == 2:
+		if file.startswith("-r="):
+			delay = int(file[3:])
+			file = args[1]
+		else:
+			delay = int(args[1][3:])
+	if not RAW:
+		colorama.init()
 	get_input()
 	code = read_code(file)
 	tokens = tokenize(code)
-	execute(tokens)
-	output()
+	execute(tokens, delay)
+	output(delay)
 
 if __name__ == '__main__':
-	if len(sys.argv) == 2:
-		main(sys.argv[1])
+	if 4 > len(sys.argv) > 1:
+		main(sys.argv[1:])
 	else:
 		exit('Usage: pbi.py program.pb')
