@@ -44,6 +44,10 @@ def read_code(file):
 
 def tokenize(code):
 	"""Return a list of all the seperate tokens in the code"""
+	for line in code.split('\n'):
+		if line[0] == ' ':
+			print 'stop doing this horrible thing'
+			1/0
 	tokens = []
 	# combine [] and {} blocks into a single token
 	square_depth = 0
