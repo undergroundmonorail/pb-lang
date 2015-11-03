@@ -16,6 +16,8 @@ every time if you aren't on Windows unless you install the module. Sorry.
 
 # pbi
 
+![](http://i.imgur.com/wSJXDJD.png)
+
 pbi is the pb interpreter. Run it as `pbi.py program.pb`. You may optionally include a flag such as `-d=1000`, which will print the canvas at each tick. The included number sets the delay between ticks in milliseconds.
 
 # Spec
